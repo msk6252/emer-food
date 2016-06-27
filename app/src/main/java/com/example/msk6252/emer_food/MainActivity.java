@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SimpleCursorAdapter;
+
 
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mRecycleView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private SimpleCursorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +42,29 @@ public class MainActivity extends AppCompatActivity {
         MyOpenHelper DBhelper = new MyOpenHelper(this);
         SQLiteDatabase db = DBhelper.getWritableDatabase();
 
-        String SQL = "select * from emerfood";
+        String SQL = "select * from emerfood;";
         Cursor c = null;
+        c = db.rawQuery(SQL,null);
+        c.moveToFirst();
 
-        c = db.rawQuery(FoodContract.Food.TABLE_NAME,null,null);
+        final ArrayList<String> adapter = new ArrayList<String>();
 
+        if(db != null){
+             //try {
+                     for (int i = 0; i < c.getCount(); i++) {
+                         int id= c.getInt(c.getColumnIndex(FoodContract.Food._ID));
+                         String name= c.getString(c.getColumnIndex(FoodContract.Food.COL_NAME));
+                         adapter.add(name);
+                         c.moveToNext();
+                     }
+                    db.close();
 
-        int[] to = {android.R.id.text1,android.R.id.text2};
+                     mAdapter = new CardAdapter(this, adapter);
+                     mRecycleView.setAdapter(mAdapter);
+             //}catch(Exception e){
 
-
-
-        final ArrayList<String> myDataSet = new ArrayList<String>() {
-            {
-                add("アルファ米");
-                add("水");
-                add("乾パン");
-            }
-        };
-
-
-
-        mAdapter = new CardAdapter(this, myDataSet);
-        mRecycleView.setAdapter(mAdapter);
-
+             //}
+        }
         SwipeableRecyclerViewTouchListener swipeTouchListener =
                 new SwipeableRecyclerViewTouchListener(mRecycleView,
                         new SwipeableRecyclerViewTouchListener.SwipeListener() {
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    myDataSet.remove(position);
+                                    adapter.remove(position);
                                     mAdapter.notifyItemRemoved(position);
                                 }
                                 mAdapter.notifyDataSetChanged();
@@ -83,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
-                                    myDataSet.remove(position);
+                                    adapter.remove(position);
                                     mAdapter.notifyItemRemoved(position);
                                 }
                                 mAdapter.notifyDataSetChanged();

@@ -37,7 +37,10 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
     public void onBindViewHolder(ViewHolder holder,int position){
         String data = (String) mDataList.get(position);
-        holder.text.setText(data);
+        if(data != null){
+            holder.text.setText(data);
+        }
+
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,7 +49,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         public ViewHolder(View v) {
             super(v);
-            text = (TextView) v.findViewById(R.id.text);
+            text = (TextView) v.findViewById(R.id.text1);
         }
     }
 

@@ -48,7 +48,7 @@
         android:text="日付" />
 
     <EditText
-        android:id="@+id/editAge"
+        android:id="@+id/editDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -62,43 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editAge"
+        android:layout_below="@+id/editDay"
         android:text="登録" />
-
-    <Button
-        android:id="@+id/update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editAge"
-        android:layout_toRightOf="@+id/insert"
-        android:text="更新" />
-
-    <Button
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/update"
-        android:layout_alignBottom="@+id/update"
-        android:layout_toRightOf="@+id/update"
-        android:text="削除" />
-
-    <Button
-        android:id="@+id/deleteAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/delete"
-        android:layout_alignBottom="@+id/delete"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/delete"
-        android:text="すべて削除" />
-
-    <Button
-        android:id="@+id/dataBase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="データベースの中身を閲覧" />
 
 </RelativeLayout>

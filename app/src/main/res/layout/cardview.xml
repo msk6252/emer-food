@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="CardView"
-            android:id="@+id/text"
+            android:id="@+id/text1"
             android:textSize="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="17dp"
