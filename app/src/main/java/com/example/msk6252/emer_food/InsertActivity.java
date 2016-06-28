@@ -21,12 +21,17 @@ public class InsertActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     setContentView(R.layout.insert_main);
+        //データベースを開くためのヘルパークラスをインスタンス化
         MyOpenHelper helper = new MyOpenHelper(this);
+        //データベースへの読み書きを許可
         final SQLiteDatabase db = helper.getWritableDatabase();
 
+
+        //レイアウトをオブジェクト化
         final EditText nameText = (EditText) findViewById(R.id.editName);
         final EditText dayText = (EditText) findViewById(R.id.editDay);
 
+        //ボタンクリックで入力値を取得し、データベースに登録
         Button entryButton = (Button) findViewById(R.id.insert);
         assert entryButton != null;
         entryButton.setOnClickListener(new OnClickListener() {
@@ -37,9 +42,11 @@ public class InsertActivity extends AppCompatActivity{
                 String day = dayText.getText().toString();
 
                 ContentValues insertValues = new ContentValues();
+                //データベースのそれぞれの値にセット
                 insertValues.put("name", name);
                 insertValues.put("day", day);
                 long id = db.insert("emerfood", name, insertValues);
+                //登録後、MainActivityに遷移
                 Intent intent = new Intent();
                 intent.setClassName(getApplicationContext(), "com.example.msk6252.emer_food.MainActivity");
                 startActivity(intent);

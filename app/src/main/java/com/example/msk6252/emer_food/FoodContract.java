@@ -8,7 +8,7 @@ import android.provider.BaseColumns;
 public final class FoodContract {
 
     public FoodContract() {}
-
+    //コントラクトでテーブル情報を記述
     public static abstract class Food implements BaseColumns {
         public static final String TABLE_NAME = "emerfood";
         public static final String COL_NAME= "name";
