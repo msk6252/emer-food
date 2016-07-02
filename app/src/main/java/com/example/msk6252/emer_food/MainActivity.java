@@ -64,17 +64,21 @@ public class MainActivity extends AppCompatActivity {
         c.moveToFirst();
 
         //ListViewに格納するためのArrayListの定義を行なう
-        final ArrayList<String> adapter = new ArrayList<String>();
+        final ArrayList<Food> adapter = new ArrayList<Food>();
 
 
         //SQL実行した結果から、要素を取得
         if(db != null){
              try {
                      for (int i = 0; i < c.getCount(); i++) {
-                         id= c.getInt(c.getColumnIndex(FoodContract.Food._ID));
+                         Food food = new Food();
+                         String id = c.getString(c.getColumnIndex(FoodContract.Food._ID));
                          String name= c.getString(c.getColumnIndex(FoodContract.Food.COL_NAME));
                          String day= c.getString(c.getColumnIndex(FoodContract.Food.COL_DAY));
-                         adapter.add(name);
+                         food.setId(id);
+                         food.setName(name);
+                         food.setDay(day);
+                         adapter.add(food);
                          c.moveToNext();
                      }
             //データベースを閉じる
@@ -107,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
                                     adapter.remove(position);
-                                    db = DBhelper.getWritableDatabase();
-                                    int deleteid = id + position;
-                                    db.delete("emerfood", "_id =" + deleteid, null);
+                                    //int delete_id = CardAdapter.getItemCount();
+                                    //db = DBhelper.getWritableDatabase();
+                                    //db.delete("emerfood", "id = " , null);
                                     mAdapter.notifyItemRemoved(position);
 
                                 }
@@ -120,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         mRecycleView.addOnItemTouchListener(swipeTouchListener);
 
 
-        //右下に登録画面へ遷移するためのボタンを設置
+        //右下に登録画面(InsertActivity)へ遷移するためのボタンを設置
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {

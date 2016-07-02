@@ -1,5 +1,6 @@
 package com.example.msk6252.emer_food;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import android.view.View.OnClickListener;
 
 /**
@@ -26,14 +27,16 @@ public class InsertActivity extends AppCompatActivity{
         //データベースへの読み書きを許可
         final SQLiteDatabase db = helper.getWritableDatabase();
 
-
         //レイアウトをオブジェクト化
         final EditText nameText = (EditText) findViewById(R.id.editName);
         final EditText dayText = (EditText) findViewById(R.id.editDay);
 
-        //ボタンクリックで入力値を取得し、データベースに登録
+        //ボタンクリックで入力値を取得し、データベースに登録1. ２つ目のウィンドウで、C:¥Users¥Public¥Desktopにアクセス。
         Button entryButton = (Button) findViewById(R.id.insert);
         assert entryButton != null;
+
+
+
         entryButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -58,5 +61,6 @@ public class InsertActivity extends AppCompatActivity{
         super.onResume();
         Intent i = getIntent();
     }
+
 }
 
