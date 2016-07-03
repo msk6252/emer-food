@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 /**
  * Created by msk6252 on 16/06/26.
@@ -47,6 +48,12 @@ public class InsertActivity extends AppCompatActivity{
             }
         );
 
+
+        /*登録ボタンが押された時に以下の動作を行なう
+        * ・入力値を取得し、変数に格納
+        * ・データベースに登録するための下準備
+        * ・データベースに登録
+        * */
         entryButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -54,15 +61,21 @@ public class InsertActivity extends AppCompatActivity{
                 String name = nameText.getText().toString();
                 String day = dayText.getText().toString();
 
-                ContentValues insertValues = new ContentValues();
-                //データベースのそれぞれの値にセット
-                insertValues.put("name", name);
-                insertValues.put("day", day);
-                long id = db.insert("emerfood", name, insertValues);
-                //登録後、MainActivityに遷移
-                Intent intent = new Intent();
-                intent.setClassName(getApplicationContext(), "com.example.msk6252.emer_food.MainActivity");
-                startActivity(intent);
+                if(name == "" || day == "" || name.length() == 0 || day.length() == 0){
+                    Toast.makeText(InsertActivity.this, "食糧名または日付が入力されていません", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    ContentValues insertValues = new ContentValues();
+                    //データベースのそれぞれの値にセット
+                    insertValues.put("name", name);
+                    insertValues.put("day", day);
+                    long id = db.insert("emerfood", name, insertValues);
+                    //登録後、MainActivityに遷移
+                    Intent intent = new Intent();
+                    intent.setClassName(getApplicationContext(), "com.example.msk6252.emer_food.MainActivity");
+                    startActivity(intent);
+                }
+
             }
         });
     }
