@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private SimpleCursorAdapter adapter;
     private MyOpenHelper DBhelper;
     private SQLiteDatabase db;
-    private int id;
+    private String get_id;
+    private Food get_ele;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,17 +112,16 @@ public class MainActivity extends AppCompatActivity {
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
                                     adapter.remove(position);
-                                    if(position != 0 ) {
-                                        Food get_ele = adapter.get(position);
+                                    if(position == adapter.size()-1 ) {
+                                        get_ele = adapter.get(position+1);
+                                        get_id = get_ele.getId();
                                     }else {
-                                        Food get_ele = adapter.get(position+1);
+                                        get_ele = adapter.get(position-1);
+                                        get_id = get_ele.getId();
                                     }
-                                    Food get_ele = adapter.get(position);
-                                    String get_id = get_ele.getId();
-                                    db = DBhelper.getWritableDatabase();
-                                    db.delete("emerfood", "_id = " + get_id, null);
-                                    mAdapter.notifyItemRemoved(position);
-
+                                        db = DBhelper.getWritableDatabase();
+                                        db.delete("emerfood", "_id = " + get_id, null);
+                                        mAdapter.notifyItemRemoved(position);
                                 }
                                 mAdapter.notifyDataSetChanged();
                             }
