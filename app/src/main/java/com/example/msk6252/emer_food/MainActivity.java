@@ -111,9 +111,15 @@ public class MainActivity extends AppCompatActivity {
                             public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
                                     adapter.remove(position);
-                                    //int delete_id = CardAdapter.getItemCount();
-                                    //db = DBhelper.getWritableDatabase();
-                                    //db.delete("emerfood", "id = " , null);
+                                    if(position != 0 ) {
+                                        Food get_ele = adapter.get(position);
+                                    }else {
+                                        Food get_ele = adapter.get(position+1);
+                                    }
+                                    Food get_ele = adapter.get(position);
+                                    String get_id = get_ele.getId();
+                                    db = DBhelper.getWritableDatabase();
+                                    db.delete("emerfood", "_id = " + get_id, null);
                                     mAdapter.notifyItemRemoved(position);
 
                                 }

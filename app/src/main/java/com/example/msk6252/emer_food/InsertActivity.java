@@ -33,9 +33,19 @@ public class InsertActivity extends AppCompatActivity{
 
         //ボタンクリックで入力値を取得し、データベースに登録1. ２つ目のウィンドウで、C:¥Users¥Public¥Desktopにアクセス。
         Button entryButton = (Button) findViewById(R.id.insert);
+        Button cancelButton = (Button) findViewById(R.id.cancel);
         assert entryButton != null;
+        assert cancelButton != null;
 
-
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent cancel = new Intent();
+                    cancel.setClassName(getApplicationContext(),"com.example.msk6252.emer_food.MainActivity");
+                    startActivity(cancel);
+                }
+            }
+        );
 
         entryButton.setOnClickListener(new OnClickListener() {
 

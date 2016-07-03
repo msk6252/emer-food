@@ -49,7 +49,6 @@
 
     <EditText
         android:id="@+id/editDay"
-        android:focusable="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -59,11 +58,22 @@
         android:inputType="date" />
 
     <Button
-        android:id="@+id/insert"
+        android:id="@+id/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/editDay"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:text="キャンセル" />
+
+    <Button
+        android:id="@+id/insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editDay"
+        android:layout_toRightOf="@id/cancel"
+        android:layout_marginTop="10dp"
         android:text="登録" />
 
 </RelativeLayout>
