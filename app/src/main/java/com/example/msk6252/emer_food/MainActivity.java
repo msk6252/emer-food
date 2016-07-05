@@ -103,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                             public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
                                 for (int position : reverseSortedPositions) {
                                     adapter.remove(position);
+                                    get_id = get_ele.getId();
+                                    adapter.remove(position);
+                                    db = DBhelper.getWritableDatabase();
+                                    db.delete("emerfood", "_id = " + get_id, null);
                                     mAdapter.notifyItemRemoved(position);
                                 }
                                 mAdapter.notifyDataSetChanged();
