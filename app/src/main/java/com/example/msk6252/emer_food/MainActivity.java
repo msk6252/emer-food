@@ -1,3 +1,7 @@
+/**
+ * Created by msk6252 on 16/06/21.
+ */
+
 package com.example.msk6252.emer_food;
 
 import android.content.Intent;
@@ -20,9 +24,6 @@ import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListen
 
 import java.util.ArrayList;
 
-
-//メイン画面
-
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecycleView;
@@ -30,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private SimpleCursorAdapter adapter;
     private MyOpenHelper DBhelper;
+    //データベースに接続するためのサブクラスを変数を定義
     private SQLiteDatabase db;
+    //データベースから取得したIDを格納するための変数を定義
     private String get_id;
+    //Foodコンストラクタをインスタンス化するための変数を定義
     private Food get_ele;
 
     @Override
