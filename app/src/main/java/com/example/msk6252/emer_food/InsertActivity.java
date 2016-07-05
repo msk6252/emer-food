@@ -35,7 +35,7 @@ public class InsertActivity extends AppCompatActivity{
         final SQLiteDatabase db = helper.getWritableDatabase();
 
 
-        final DatePickerDialog datePickerDialog;
+        final DatePickerDialog mDatePickerDialog;
         final Calendar calendar = Calendar.getInstance();
         final int year  = calendar.get(Calendar.YEAR);
         final int monthOfYear = calendar.get(Calendar.MONTH);
@@ -51,26 +51,27 @@ public class InsertActivity extends AppCompatActivity{
         assert entryButton != null;
         assert cancelButton != null;
 
-       /*dayText.setOnClickListener(new OnClickListener() {
+        mDatePickerDialog = new DatePickerDialog(
+                InsertActivity.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Toast.makeText(InsertActivity.this, String.valueOf(dayOfMonth), Toast.LENGTH_SHORT).show();
+                        dayText.setText(String.valueOf(year) + "/" + String.valueOf(monthOfYear+1) + "/" + String.valueOf(dayOfMonth));
+                    }
+                },
+                year,
+                monthOfYear,
+                dayOfMonth
+        );
+        //カレンダーを表示させるボタン
+        dayText.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog.OnDateSetListener DateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    public void onDateSet(android.widget.DatePicker datePicker, int year,
-                                          int monthOfYear, int dayOfMonth) {
-
-// 省略
-                    }
-                };
-
+                mDatePickerDialog.show();
             }
-
         });
 
-        datePickerDialog = new DatePickerDialog(this, DateSetListener, year, monthOfYear, dayOfMonth);
-
-// 日付設定ダイアログの表示
-        datePickerDialog.show();
-*/
 
 
 
